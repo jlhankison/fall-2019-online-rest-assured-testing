@@ -46,4 +46,14 @@ public class ORDSTests {
 
         response.then().statusCode(200);//to verify that status is 200
     }
+
+    @Test
+    @DisplayName("Get list of all countries")
+    public void getCountries(){
+        Response response = given().
+                                baseUri(BASE_URL).
+                            when().
+                                get("/countries").prettyPeek();
+        response.then().statusCode(200);
+    }
 }
