@@ -49,11 +49,12 @@ public class ORDSTests {
 
     @Test
     @DisplayName("Get list of all countries")
-    public void getCountries(){
-        Response response = given().
-                                baseUri(BASE_URL).
-                            when().
-                                get("/countries").prettyPeek();
-        response.then().statusCode(200);
+    public void getAllCountries(){
+        given().
+                baseUri(BASE_URL).
+                when().
+                get("/countries").prettyPeek().
+                then().
+                statusCode(200);
     }
 }
