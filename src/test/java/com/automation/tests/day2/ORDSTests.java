@@ -78,14 +78,4 @@ public class ORDSTests {
         ///statusLine - to verify status line
     }
 
-    @Test
-    @DisplayName("Get list of all countries")
-    public void getAllCountries(){
-        given().
-                baseUri(BASE_URL).
-                when().
-                get("/countries").prettyPeek().
-                then().
-                statusCode(200);
-    }
 }
