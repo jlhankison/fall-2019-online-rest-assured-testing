@@ -26,7 +26,7 @@ public class Spartan {
     public Spartan(String name, String gender, long phoneNumber){
         this.name = name;
         this.gender = gender;
-        this.phoneNumber = phoneNumber;
+        setPhoneNumber(phoneNumber);
     }
 
     public Spartan(int id, String name, String gender, long phoneNumber){
@@ -65,6 +65,9 @@ public class Spartan {
     }
 
     public void setPhoneNumber(long phoneNumber) {
+        if(String.valueOf(phoneNumber).length() < 10){
+            throw new RuntimeException("Phone number is too short!");
+        }else
         this.phoneNumber = phoneNumber;
     }
 
