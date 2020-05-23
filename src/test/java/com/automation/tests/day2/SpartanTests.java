@@ -1,6 +1,6 @@
 package com.automation.tests.day2;
 
-import com.github.javafaker.Faker;
+
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
