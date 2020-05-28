@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import static io.restassured.RestAssured.*;
@@ -117,5 +118,39 @@ public class POJOPracticeWithSpartanApp {
                 statusCode(200).body("name", is(name));
         //verify that name is correct, after update
 
+    }
+    @Test
+    @DisplayName("Verify that user can perform PATCH request")
+    public void patchUserTest1(){
+        //PATCH = partial update of existing record
+
+        int userId = 21;
+
+        Response response0 = given().accept(ContentType.JSON).when().get("/spartans");
+
+        List<Spartan> allSpartans = response0.jsonPath().getList("", Spartan.class);
+
+        Random random = new Random();
+
+        int randomNum = random.nextInt(allSpartans.size());
+
+        int randomUserID = allSpartans.get(randomNum).getId();
+
+        userId = randomUserID;
+
+        Map<String, String> update = new HashMap<>();
+        update.put("name", "Johnny");
+
+        Response response = given().contentType(ContentType.JSON).
+                body(update).when().patch("spartans/{id}", userId   );
+
+        response.then().assertThat().statusCode(204);
+
+        given().
+                accept(ContentType.JSON).
+        when().
+                get("/spartans/{id}", userId).prettyPeek().
+        then().
+                assertThat().statusCode(200).body("name", is("Johnny"));
     }
 }
